@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "consyncful/tree"
+require "consyncful-tree/tree"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

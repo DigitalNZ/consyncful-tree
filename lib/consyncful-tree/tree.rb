@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "tree/version"
+require_relative "version"
 
 module Consyncful
   module Tree
