@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require_relative "lib/consyncful/tree/version"
+require_relative "lib/consyncful_tree/version"
 
 Gem::Specification.new do |spec|
-  spec.name = "consyncful-tree"
-  spec.version = Consyncful::Tree::VERSION
+  spec.name = "consyncful_tree"
+  spec.version = ConsyncfulTree::VERSION
   spec.authors = ["DigitalNZ"]
   spec.email = ["info@digitalnz.org"]
 

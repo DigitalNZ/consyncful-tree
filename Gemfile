@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 
-# Specify your gem's dependencies in consyncful-tree.gemspec
+# Specify your gem's dependencies in consyncful_tree.gemspec
 gemspec
 
 gem "rake", "~> 13.0"
