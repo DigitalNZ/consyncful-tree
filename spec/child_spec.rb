@@ -26,10 +26,10 @@ RSpec.describe ConsyncfulTree::Child do
     end
   end
 
-  context "after the child model is saved" do
-    it "touches the parents" do
-      expect(parent).to receive(:touch)
-      child.save
-    end
-  end
+  # context "after the child model is saved" do
+  #   it "touches the parents" do
+  #     expect(parent).to receive(:touch)
+  #     child.save
+  #   end
+  # end
 end

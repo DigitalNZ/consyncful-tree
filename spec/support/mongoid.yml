@@ -1,6 +1,6 @@
 test:
   clients:
     default:
-      database: consyncful_test
+      database: consyncful-tree_test
       hosts:
         - localhost:27017
