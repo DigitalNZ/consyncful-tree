@@ -4,7 +4,7 @@ require "active_support/concern"
 
 # Parent module is included to parent Consyncful models
 # This module allows the current parent class to lookup its children no matter where they are.
-module Consyncful
+module ConsyncfulTree
   module Parent
     extend ActiveSupport::Concern
 
