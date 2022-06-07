@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 require "consyncful_tree"
+require "bundler/setup"
+require "consyncful"
+require "database_cleaner-mongoid"
+
+Mongoid.load!("spec/support/mongoid.yml", :test)
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

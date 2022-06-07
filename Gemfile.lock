@@ -9,9 +9,6 @@ GEM
   specs:
     activemodel (7.0.3)
       activesupport (= 7.0.3)
-    activerecord (7.0.3)
-      activemodel (= 7.0.3)
-      activesupport (= 7.0.3)
     activesupport (7.0.3)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 1.6, < 2)
@@ -30,12 +27,10 @@ GEM
     contentful (2.16.3)
       http (> 0.8, < 5.0)
       multi_json (~> 1)
-    database_cleaner (2.0.1)
-      database_cleaner-active_record (~> 2.0.0)
-    database_cleaner-active_record (2.0.1)
-      activerecord (>= 5.a)
-      database_cleaner-core (~> 2.0.0)
     database_cleaner-core (2.0.1)
+    database_cleaner-mongoid (2.0.1)
+      database_cleaner-core (~> 2.0.0)
+      mongoid
     diff-lcs (1.5.0)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
@@ -117,7 +112,7 @@ PLATFORMS
 DEPENDENCIES
   bundler (~> 2)
   consyncful_tree!
-  database_cleaner
+  database_cleaner-mongoid (~> 2.0)
   rake (~> 13.0)
   rspec (~> 3.0)
   rubocop
