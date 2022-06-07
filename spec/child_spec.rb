@@ -17,11 +17,19 @@ class TestParent < Consyncful::Base
 end
 
 RSpec.describe ConsyncfulTree::Child do
+  let!(:child) { TestChild.create(title: "I'm a child") }
+  let!(:parent) { TestParent.create(title: "I'm a parent", child_models: [child]) }
+
   describe ".parents" do
     it "returns a list of parents" do
-      child = TestChild.create(title: "I'm a child")
-      TestParent.create(title: "I'm a parent", child_models: [child])
       expect(child.parents.first.title).to eq "I'm a parent"
+    end
+  end
+
+  context "after the child model is saved" do
+    it "touches the parents" do
+      expect(parent).to receive(:touch)
+      child.save
     end
   end
 end
