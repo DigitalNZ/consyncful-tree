@@ -4,6 +4,7 @@ require "consyncful_tree"
 require "bundler/setup"
 require "consyncful"
 require "database_cleaner-mongoid"
+require "pry-byebug"
 
 Mongoid.load!("spec/support/mongoid.yml", :test)
 
