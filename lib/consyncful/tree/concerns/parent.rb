@@ -9,16 +9,6 @@ module Consyncful
     module Parent
       extend ActiveSupport::Concern
 
-      # We can determine these classes automatically,
-      # but you will have hard time finding them since we have lots of models.
-      ROOT_CLASSES = [
-        "Consyncful::Page",
-        "Consyncful::Event",
-        "Consyncful::EventSeries",
-        "Consyncful::BlogPage",
-        "Consyncful::HomePage"
-      ].freeze
-
       included do
         references_many :child_models
 
@@ -46,7 +36,7 @@ module Consyncful
 
           next if obj.nil?
 
-          lookup_child_model_ids(context: obj) if ROOT_CLASSES.exclude?(obj.class.to_s)
+          lookup_child_model_ids(context: obj) if classes_with_parent_concern.exclude?(obj.class.to_s)
         end.flatten.compact
       end
 
@@ -58,6 +48,12 @@ module Consyncful
         klasses = child_models.map(&:class).uniq.map(&:to_s)
 
         klasses.include?(klass.to_s)
+      end
+
+      private
+
+      def classes_with_parent_concern
+        ObjectSpace.each_object(Class).select { |c| c.included_modules.include?(Consyncful::Tree::Parent) }
       end
     end
   end
