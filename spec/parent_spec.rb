@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-# # frozen_string_literal: true
 
 # class TestGrandchild < Consyncful::Base
 #   include Consyncful::Tree::Child
@@ -15,7 +14,7 @@
 
 #   contentful_model_name "testChild"
 
-#   references_one test_grandchild
+#   references_many :test_grandchildren
 
 #   field :title, type: String
 # end
@@ -25,15 +24,15 @@
 
 #   contentful_model_name "testParent"
 
-#   references_one test_child
+#   references_one :test_child
 
 #   field :title, type: String
 # end
 
-# describe Consyncful::Parent do
+# RSpec.describe Consyncful::Tree::Parent do
 #   # Build a page data with nested child
 #   let!(:grandchild) { TestGrandchild.create(title: "I'm a grandchild") }
-#   let!(:child) { TestChild.create(title: "I'm a child", test_grandchilds: [grandchild]) }
+#   let!(:child) { TestChild.create(title: "I'm a child", test_grandchildren: [grandchild]) }
 #   let!(:parent) { TestParent.create(title: "I'm a parent", test_child: child) }
 
 #   describe "#lookup_child_model_ids" do
