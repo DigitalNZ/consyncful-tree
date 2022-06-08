@@ -53,6 +53,11 @@ module Consyncful
       private
 
       def classes_with_parent_concern
+        # ObjectSpace lets you interact with garbage collection and traverse alive objects.
+        # This will iterate through all the classes for objects that are alive.
+        #
+        # NOTE: when a Rails app is running, it will have all the classes loaded, but in tests or the console
+        # for this Gem, it will just be the ones used in the test.
         ObjectSpace.each_object(Class).select { |c| c.included_modules.include?(Consyncful::Tree::Parent) }
       end
     end

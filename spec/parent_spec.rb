@@ -1,54 +1,32 @@
 # frozen_string_literal: true
 
-# class TestGrandchild < Consyncful::Base
-#   include Consyncful::Tree::Child
+require_relative "test_models/test_grandchild"
+require_relative "test_models/test_child"
+require_relative "test_models/test_parent"
 
-#   contentful_model_name "testGrandchild"
+RSpec.describe Consyncful::Tree::Parent do
+  # Build a page data with nested child
+  let!(:grandchild) { TestGrandchild.create(title: "I'm a grandchild") }
+  let!(:child) { TestChild.create(title: "I'm a child", test_grandchildren: [grandchild]) }
+  let!(:parent) { TestParent.create(title: "I'm a parent", test_children: [child]) }
 
-#   field :title, type: String
-# end
+  describe "#lookup_child_model_ids" do
+    it "contains the id of direct children" do
+      expect(parent.child_model_ids).to include child.id
+    end
 
-# class TestChild < Consyncful::Base
-#   include Consyncful::Tree::Child
-#   include Consyncful::Tree::Parent
+    it "contains the id of indirect children" do
+      expect(parent.child_model_ids).to include grandchild.id
+    end
+  end
 
-#   contentful_model_name "testChild"
+  describe "#with_child_class_of?" do
+    it "returns true" do
+      expect(parent.with_child_class_of?(TestChild)).to eq true
+    end
 
-#   references_many :test_grandchildren
-
-#   field :title, type: String
-# end
-
-# class TestParent < Consyncful::Base
-#   include Consyncful::Tree::Parent
-
-#   contentful_model_name "testParent"
-
-#   references_one :test_child
-
-#   field :title, type: String
-# end
-
-# RSpec.describe Consyncful::Tree::Parent do
-#   # Build a page data with nested child
-#   let!(:grandchild) { TestGrandchild.create(title: "I'm a grandchild") }
-#   let!(:child) { TestChild.create(title: "I'm a child", test_grandchildren: [grandchild]) }
-#   let!(:parent) { TestParent.create(title: "I'm a parent", test_child: child) }
-
-#   describe "#lookup_child_model_ids" do
-#     it "sets child models" do
-#       expect(parent.child_model_ids).to include child.id
-#       expect(parent.child_model_ids).to include grandchild.id
-#     end
-#   end
-
-#   describe "#with_child_class_of?" do
-#     it "returns true" do
-#       expect(parent.with_child_class_of?(TestChild)).to eq true
-#     end
-
-#     it "returns false" do
-#       expect(parent.with_child_class_of?(Array)).to eq false
-#     end
-#   end
-# end
+    it "returns false" do
+      expect(parent.with_child_class_of?(Array)).to eq false
+    end
+  end
+end
