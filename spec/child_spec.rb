@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class TestChild < Consyncful::Base
-  include ConsyncfulTree::Child
+  include Consyncful::Tree::Child
 
   contentful_model_name "testChild"
 
@@ -16,7 +16,7 @@ class TestParent < Consyncful::Base
   field :title, type: String
 end
 
-RSpec.describe ConsyncfulTree::Child do
+RSpec.describe Consyncful::Tree::Child do
   let!(:child) { TestChild.create(title: "I'm a child") }
   let!(:parent) { TestParent.create(title: "I'm a parent", child_models: [child]) }
 

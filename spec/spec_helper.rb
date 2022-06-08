@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "consyncful_tree"
+require "consyncful/tree"
 require "bundler/setup"
 require "consyncful"
 require "database_cleaner-mongoid"

@@ -1,7 +1,7 @@
 # # frozen_string_literal: true
 
 # class TestGrandchild < Consyncful::Base
-#   include ConsyncfulTree::Child
+#   include Consyncful::Tree::Child
 
 #   contentful_model_name "testGrandchild"
 
@@ -9,8 +9,8 @@
 # end
 
 # class TestChild < Consyncful::Base
-#   include ConsyncfulTree::Child
-#   include ConsyncfulTree::Parent
+#   include Consyncful::Tree::Child
+#   include Consyncful::Tree::Parent
 
 #   contentful_model_name "testChild"
 
@@ -20,7 +20,7 @@
 # end
 
 # class TestParent < Consyncful::Base
-#   include ConsyncfulTree::Parent
+#   include Consyncful::Tree::Parent
 
 #   contentful_model_name "testParent"
 
