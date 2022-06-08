@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class TestChild < Consyncful::Base
+  include Mongoid::Timestamps
   include Consyncful::Tree::Child
   include Consyncful::Tree::Parent
 

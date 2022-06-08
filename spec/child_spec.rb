@@ -13,10 +13,12 @@ RSpec.describe Consyncful::Tree::Child do
     end
   end
 
-  # context "after the child model is saved" do
-  #   it "touches the parents" do
-  #     expect(parent).to receive(:touch)
-  #     child.save
-  #   end
-  # end
+  context "after the child model is saved" do
+    it "touches the parents" do
+      updated_at = parent.updated_at
+      child.save
+      parent.reload
+      expect(parent.updated_at).to be > updated_at
+    end
+  end
 end
