@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.summary = "Code to help with adding a tree structure to Contentful models."
   spec.description = "Code to help with adding a tree structure to Contentful models."
   spec.homepage = "https://github.com/DigitalNZ/consyncful-tree"
-  spec.required_ruby_version = ">= 2.6.0"
+  spec.required_ruby_version = ">= 2.7.0"
 
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = "https://github.com/DigitalNZ/consyncful-tree"
