@@ -3,7 +3,6 @@
 class TestChild < Consyncful::Base
   include Mongoid::Timestamps
   include Consyncful::Tree::Child
-  include Consyncful::Tree::Parent
 
   contentful_model_name "testChild"
 
