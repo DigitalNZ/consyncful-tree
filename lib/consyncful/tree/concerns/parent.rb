@@ -24,19 +24,20 @@ module Consyncful
 
           next if key == "child_models" || child_ids.empty?
 
-          child_ids + lookup_child_objects(child_ids)
+          child_objects = child_ids.map { |id| Consyncful::Base.where(id: id).first }
+
+          child_ids + lookup_child_model_ids_for_list(child_objects)
         end.flatten.compact
       end
 
-      def lookup_child_objects(child_ids)
-        return [] if child_ids.empty?
+      def lookup_child_model_ids_for_list(child_objects)
+        return [] if child_objects.empty?
 
-        child_ids.map do |id|
-          obj = Consyncful::Base.where(id: id).first
-
+        child_objects.map do |obj|
           next if obj.nil?
 
-          lookup_child_model_ids(context: obj) if classes_with_parent_concern.exclude?(obj.class.to_s)
+          obj_is_parent = classes_with_parent_concern.include?(obj.class)
+          lookup_child_model_ids(context: obj) unless obj_is_parent
         end.flatten.compact
       end
 
@@ -51,6 +52,16 @@ module Consyncful
       end
 
       private
+
+      # NOTE: I think this break condition is a bit odd.
+      # It works if we think about a "Parent" being a unit that's fields and dependencies will display on
+      # one page; if it isn't content we are going to display with the parent, then we don't care.
+      # It protects us from some kinds of cyclic depencencies.
+      #
+      # However, if we changed our recursive method to instead pass down the children that had been found so far and
+      # only check its children's children if they aren't in the list yet, then we'd be protected from all
+      # cyclic dependencies.
+      # I ran out of time to make that change.
 
       def classes_with_parent_concern
         # ObjectSpace lets you interact with garbage collection and traverse alive objects.
