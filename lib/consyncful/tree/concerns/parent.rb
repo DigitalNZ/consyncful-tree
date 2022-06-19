@@ -24,21 +24,19 @@ module Consyncful
 
           next if key == "child_models" || child_ids.empty?
 
-          child_objects = child_ids.map { |id| Consyncful::Base.where(id: id).first }
+          child_objects = Consyncful::Base.where(id: { "$in": child_ids })
 
           child_ids + lookup_child_model_ids_for_list(child_objects)
-        end.flatten.compact
+        end.flatten
       end
 
       def lookup_child_model_ids_for_list(child_objects)
         return [] if child_objects.empty?
 
         child_objects.map do |obj|
-          next if obj.nil?
-
           obj_is_parent = classes_with_parent_concern.include?(obj.class)
           lookup_child_model_ids(context: obj) unless obj_is_parent
-        end.flatten.compact
+        end.flatten
       end
 
       # Returns true/false if the parent has a child model with a specific class.
