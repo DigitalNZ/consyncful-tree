@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    consyncful-tree (1.0.0)
+    consyncful-tree (1.0.1)
       consyncful (~> 0.7.0)
 
 GEM
